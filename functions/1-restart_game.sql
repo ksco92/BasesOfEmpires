@@ -16,3 +16,5 @@ set ORO           = 5000000,
     HIERRO        = 2000000,
     PRECIO_MADERA = 2.000,
     PRECIO_HIERRO = 4.000;
+
+truncate table WAR_MASTER.TRANSACCIONES;
