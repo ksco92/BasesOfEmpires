@@ -56,6 +56,6 @@ create or replace procedure WAR_MASTER.sell(p_material varchar2, p_cantidad_vend
 
         end case;
 
-        insert into WAR_MASTER.TRANSACCIONES values (WAR_MASTER.TRANSAC_SEQ.nextval, 'CMP', p_reino);
+        insert into WAR_MASTER.TRANSACCIONES values (WAR_MASTER.TRANSAC_SEQ.nextval, 'VTA', p_reino);
 
     end;
