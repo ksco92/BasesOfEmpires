@@ -3,7 +3,7 @@
 To create the tables.
 */
 
-create table REINOS
+create table WAR_MASTER.REINOS
 (
     ID_REINO           NUMBER       not null
         primary key,
@@ -22,7 +22,7 @@ create table REINOS
     CORONAS            NUMBER        default 0
 );
 
-create table RESERVA_CENTRAL
+create table WAR_MASTER.RESERVA_CENTRAL
 (
     ORO           NUMBER        default 0,
     MADERA        NUMBER        default 0,
@@ -31,7 +31,7 @@ create table RESERVA_CENTRAL
     PRECIO_HIERRO NUMBER(10, 3) default 0
 );
 
-create table TRANSACCIONES
+create table WAR_MASTER.TRANSACCIONES
 (
     ID_TRANSACCION   NUMBER default NULL not null
         constraint TRANSAC_ID_TRANSAC_PK
