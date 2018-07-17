@@ -46,3 +46,31 @@ Allows a kingdom to buy wood or iron from the central reserve. Follows these ste
 * Subtracts the added gold from the central reserve.
 * Adds the amount of material bought to the central reserve.
 * Decrease the central reserve price of that material.
+
+### train
+
+Recives the following parameters:
+* `p_troop -> varchar`
+* `p_amount -> number`
+* `p_kingdom -> number`
+
+Allows a kingdom to train troops. Follows these steps:
+* Subtracts the amount of materials needed to train the amount requested.
+* Adds the selected troop to the kingdom.
+* Adds the amount of crowns corresponding to the troop and the amount.
+* Adds the spent materials into the central reserve.
+* Decrese the central reserve price of the materials.
+
+### defences
+
+Recives the following parameters:
+* `p_defense -> varchar`
+* `p_amount -> number`
+* `p_kingdom -> number`
+
+Allows the kingdom to build defenses. Follows these steps:
+* Subtracts the amount of materials needed to build the amount requested.
+* Increse the defense of the kingdom.
+* Adds the amount of crowns corresponding to the defense and the amount.
+* Adds the spent materials into the central reserve.
+* Decrese the central reserve price of the materials.
