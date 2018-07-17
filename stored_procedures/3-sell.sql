@@ -17,7 +17,7 @@ create or replace procedure WAR_MASTER.sell(p_material varchar2, p_cantidad_vend
                 update WAR_MASTER.REINOS
                 set MADERA  = MADERA - p_cantidad_vendida,
                     ORO     = ORO + p_precio_material,
-                    CORONAS = CORONAS + 5
+                    CORONAS = CORONAS + 10
                 where ID_REINO = p_reino;
 
                 update WAR_MASTER.RESERVA_CENTRAL
@@ -41,7 +41,7 @@ create or replace procedure WAR_MASTER.sell(p_material varchar2, p_cantidad_vend
                 update WAR_MASTER.REINOS
                 set HIERRO  = HIERRO - p_cantidad_vendida,
                     ORO     = ORO + p_precio_material,
-                    CORONAS = CORONAS + 5
+                    CORONAS = CORONAS + 10
                 where ID_REINO = p_reino;
 
                 update WAR_MASTER.RESERVA_CENTRAL
