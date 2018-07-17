@@ -1,8 +1,9 @@
-create or replace procedure WAR_MASTER.train(p_defensa VARCHAR2, p_cantidad NUMBER, p_reino NUMBER) as
+create or replace procedure WAR_MASTER.defensas(p_defensa VARCHAR2, p_cantidad NUMBER, p_reino NUMBER) as
 
   v_madera        NUMBER;
   v_hierro        NUMBER;
   v_oro           NUMBER;
+  v_coronas	  NUMBER;
   r_madera        NUMBER;
   r_hierro        NUMBER;
   r_oro           NUMBER;
