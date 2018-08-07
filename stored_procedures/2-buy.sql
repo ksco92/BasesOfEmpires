@@ -1,7 +1,7 @@
-create or replace procedure WAR_MASTER.buy(p_material varchar2, p_cantidad_comprada number, p_reino number) as
+create or replace procedure WAR_MASTER.buy(p_material varchar2, p_amount_bought number, p_kingdom number) as
 
-    p_reserva_material number;
-    p_precio_material  number(10, 3);
+    p_reserve_material number;
+    p_material_price  number(10, 3);
 
     begin
 
@@ -9,53 +9,54 @@ create or replace procedure WAR_MASTER.buy(p_material varchar2, p_cantidad_compr
             when 'MADERA'
             then
                 select
-                    MADERA,
-                    PRECIO_MADERA
-                into p_reserva_material, p_precio_material
-                from WAR_MASTER.RESERVA_CENTRAL;
+                    WOOD,
+                    WOOD_PRICE
+                into p_reserve_material, p_material_price
+                from WAR_MASTER.CENTRAL_RESERVE;
 
-                update WAR_MASTER.REINOS
-                set MADERA  = MADERA + p_cantidad_comprada,
-                    ORO     = ORO - p_precio_material,
-                    CORONAS = CORONAS + 5
-                where ID_REINO = p_reino;
+                update WAR_MASTER.KINGDOMS
+                set WOOD  = WOOD + p_amount_bought,
+                    gold     = gold - p_material_price,
+                    CROWNS = CROWNS + 5
+                where ID_KINGDOM = p_kingdom;
 
-                update WAR_MASTER.RESERVA_CENTRAL
-                set ORO    = ORO + p_precio_material,
-                    MADERA = MADERA - p_cantidad_comprada;
+                update WAR_MASTER.CENTRAL_RESERVE
+                set GOLD    = GOLD + p_material_price,
+                    WOOD = WOOD - p_amount_bought;
 
-                p_precio_material :=
-                p_precio_material + (p_precio_material * round(p_cantidad_comprada / p_reserva_material, 2));
+                p_material_price :=
+                p_material_price + (p_material_price * round(p_amount_bought / p_reserve_material, 2));
 
-                update WAR_MASTER.RESERVA_CENTRAL
-                set PRECIO_MADERA = p_precio_material;
+                update WAR_MASTER.CENTRAL_RESERVE
+                set WOOD_PRICE = p_material_price;
 
             when 'HIERRO'
             then
                 select
-                    HIERRO,
-                    PRECIO_HIERRO
-                into p_reserva_material, p_precio_material
-                from WAR_MASTER.RESERVA_CENTRAL;
+                    IRON,
+                    IRON_PRICE
+                into p_reserve_material, p_material_price
+                from WAR_MASTER.CENTRAL_RESERVE;
 
-                update WAR_MASTER.REINOS
-                set HIERRO  = HIERRO + p_cantidad_comprada,
-                    ORO     = ORO - p_precio_material,
-                    CORONAS = CORONAS + 5
-                where ID_REINO = p_reino;
+                update WAR_MASTER.KINGDOMS
+                set IRON  = IRON + p_amount_bought,
+                    gold     = gold - p_material_price,
+                    CROWNS = CROWNS + 5
+                where ID_KINGDOM = p_kingdom;
 
-                update WAR_MASTER.RESERVA_CENTRAL
-                set ORO    = ORO + p_precio_material,
-                    HIERRO = HIERRO - p_cantidad_comprada;
+                update WAR_MASTER.CENTRAL_RESERVE
+                set GOLD    = GOLD + p_material_price,
+                    IRON = IRON - p_amount_bought;
 
-                p_precio_material :=
-                p_precio_material + (p_precio_material * round(p_cantidad_comprada / p_reserva_material, 2));
+                p_material_price :=
+                p_material_price + (p_material_price * round(p_amount_bought / p_reserve_material, 2));
 
-                update WAR_MASTER.RESERVA_CENTRAL
-                set PRECIO_HIERRO = p_precio_material;
+                update WAR_MASTER.CENTRAL_RESERVE
+                set IRON_PRICE = p_material_price;
 
         end case;
 
-        insert into WAR_MASTER.TRANSACCIONES values (WAR_MASTER.TRANSAC_SEQ.nextval, 'CMP', p_reino);
+        insert into WAR_MASTER.TRANSACTIONS (TRANSACTION_ID, TRANSACTION_TYPE, ID_KINGDOM, UNIT_TYPE)
+        values (WAR_MASTER.TRANSAC_SEQ.nextval, 'CMP', p_kingdom, p_material);
 
     end;

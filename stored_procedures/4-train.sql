@@ -15,27 +15,27 @@ create or replace procedure WAR_MASTER.train(p_tropa VARCHAR2, p_cantidad NUMBER
   tp_oro    NUMBER;
   BEGIN
     SELECT
-      madera,
-      hierro,
-      oro,
-      coronas
+      WOOD,
+      IRON,
+      gold,
+      CROWNS
     INTO v_madera, v_hierro, v_oro, v_coronas
-    FROM war_master.reinos
-    WHERE id_reino = p_reino;
+    FROM war_master.KINGDOMS
+    WHERE ID_KINGDOM = p_reino;
 
     SELECT
-      madera,
-      hierro,
-      oro,
-      precio_madera,
-      precio_hierro
+      WOOD,
+      IRON,
+      GOLD,
+      WOOD_PRICE,
+      IRON_PRICE
     INTO
       r_madera,
       r_hierro,
       r_oro,
       r_madera_precio,
       r_hierro_precio
-    FROM war_master.reserva_central;
+    FROM war_master.CENTRAL_RESERVE;
 
     CASE p_tropa
       WHEN 'arqueros'
@@ -44,15 +44,15 @@ create or replace procedure WAR_MASTER.train(p_tropa VARCHAR2, p_cantidad NUMBER
         tp_hierro := 40;
         tp_oro := 20;
 
-        SELECT arqueros
+        SELECT ARCHERS
         INTO v_tropa
-        FROM war_master.reinos
-        WHERE id_reino = p_reino;
+        FROM war_master.KINGDOMS
+        WHERE ID_KINGDOM = p_reino;
 
-        UPDATE war_master.reinos
-        SET arqueros = v_tropa + p_cantidad,
-          coronas    = v_coronas + 2 * p_cantidad
-        WHERE id_reino = p_reino;
+        UPDATE war_master.KINGDOMS
+        SET ARCHERS = v_tropa + p_cantidad,
+          CROWNS    = v_coronas + 2 * p_cantidad
+        WHERE ID_KINGDOM = p_reino;
 
       WHEN 'piqueros'
       THEN
@@ -60,15 +60,15 @@ create or replace procedure WAR_MASTER.train(p_tropa VARCHAR2, p_cantidad NUMBER
         tp_hierro := 60;
         tp_oro := 25;
 
-        SELECT piqueros
+        SELECT PIKEMEN
         INTO v_tropa
-        FROM war_master.reinos
-        WHERE id_reino = p_reino;
+        FROM war_master.KINGDOMS
+        WHERE ID_KINGDOM = p_reino;
 
-        UPDATE war_master.reinos
-        SET piqueros = v_tropa + p_cantidad,
-          coronas    = v_coronas + 3 * p_cantidad
-        WHERE id_reino = p_reino;
+        UPDATE war_master.KINGDOMS
+        SET PIKEMEN = v_tropa + p_cantidad,
+          CROWNS    = v_coronas + 3 * p_cantidad
+        WHERE ID_KINGDOM = p_reino;
 
       WHEN 'caballeros'
       THEN
@@ -76,15 +76,15 @@ create or replace procedure WAR_MASTER.train(p_tropa VARCHAR2, p_cantidad NUMBER
         tp_hierro := 30;
         tp_oro := 100;
 
-        SELECT caballeros
+        SELECT KNIGHTS
         INTO v_tropa
-        FROM war_master.reinos
-        WHERE id_reino = p_reino;
+        FROM war_master.KINGDOMS
+        WHERE ID_KINGDOM = p_reino;
 
-        UPDATE war_master.reinos
-        SET caballeros = v_tropa + p_cantidad,
-          coronas      = v_coronas + 5 * p_cantidad
-        WHERE id_reino = p_reino;
+        UPDATE war_master.KINGDOMS
+        SET KNIGHTS = v_tropa + p_cantidad,
+          CROWNS      = v_coronas + 5 * p_cantidad
+        WHERE ID_KINGDOM = p_reino;
 
       WHEN 'magos'
       THEN
@@ -92,34 +92,34 @@ create or replace procedure WAR_MASTER.train(p_tropa VARCHAR2, p_cantidad NUMBER
         tp_hierro := 50;
         tp_oro := 50;
 
-        SELECT magos
+        SELECT WIZARDS
         INTO v_tropa
-        FROM war_master.reinos
-        WHERE id_reino = p_reino;
+        FROM war_master.KINGDOMS
+        WHERE ID_KINGDOM = p_reino;
 
-        UPDATE war_master.reinos
-        SET magos = v_tropa + p_cantidad,
-          coronas = v_coronas + 1 * p_cantidad
-        WHERE id_reino = p_reino;
+        UPDATE war_master.KINGDOMS
+        SET WIZARDS = v_tropa + p_cantidad,
+          CROWNS = v_coronas + 1 * p_cantidad
+        WHERE ID_KINGDOM = p_reino;
 
     END CASE;
     IF v_madera >= tp_madera * p_cantidad AND v_hierro >= tp_hierro * p_cantidad AND v_oro >= tp_oro * p_cantidad
     THEN
-      UPDATE war_master.reinos
-      SET madera = v_madera - tp_madera * p_cantidad,
-        hierro   = v_hierro - tp_hierro * p_cantidad,
-        oro      = v_oro - tp_oro * p_cantidad
-      WHERE id_reino = p_reino;
+      UPDATE war_master.KINGDOMS
+      SET WOOD = v_madera - tp_madera * p_cantidad,
+        IRON   = v_hierro - tp_hierro * p_cantidad,
+        gold      = v_oro - tp_oro * p_cantidad
+      WHERE ID_KINGDOM = p_reino;
 
-      UPDATE war_master.reserva_central
-      SET precio_madera = r_madera_precio - round(r_madera_precio * (p_cantidad * tp_madera / r_madera), 2),
-        precio_hierro   = r_hierro_precio - round(r_hierro_precio * (p_cantidad * tp_hierro / r_hierro), 2),
-        madera          = r_madera + tp_madera * p_cantidad,
-        hierro          = r_hierro + tp_hierro * p_cantidad,
-        oro             = r_oro + tp_oro * p_cantidad;
+      UPDATE war_master.CENTRAL_RESERVE
+      SET WOOD_PRICE = r_madera_precio - round(r_madera_precio * (p_cantidad * tp_madera / r_madera), 2),
+        IRON_PRICE   = r_hierro_precio - round(r_hierro_precio * (p_cantidad * tp_hierro / r_hierro), 2),
+        WOOD          = r_madera + tp_madera * p_cantidad,
+        IRON          = r_hierro + tp_hierro * p_cantidad,
+        GOLD             = r_oro + tp_oro * p_cantidad;
     ELSE
       DBMS_OUTPUT.PUT_LINE('NO tienes suficientes recursos para realizar la transaccion');
     END IF;
-    insert into WAR_MASTER.TRANSACCIONES values (WAR_MASTER.TRANSAC_SEQ.nextval, 'TRP', p_reino);
+    insert into WAR_MASTER.TRANSACTIONS values (WAR_MASTER.TRANSAC_SEQ.nextval, 'TRP', p_reino);
   END;
 /
