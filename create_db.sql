@@ -40,6 +40,8 @@ create table WAR_MASTER.TRANSACTIONS
         primary key,
     TRANSACTION_TYPE     VARCHAR2(15),
     UNIT_TYPE            VARCHAR2(15),
+    AMOUNT               NUMBER,
+    CROWNS               NUMBER,
     TRANSACTION_DATETIME TIMESTAMP(6) default CURRENT_TIMESTAMP,
     ID_KINGDOM           NUMBER
         constraint TRANSAC_REINOS_ID_REINO_FK

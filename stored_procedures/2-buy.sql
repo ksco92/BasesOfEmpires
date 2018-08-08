@@ -56,7 +56,7 @@ create or replace procedure WAR_MASTER.buy(p_material varchar2, p_amount_bought 
 
         end case;
 
-        insert into WAR_MASTER.TRANSACTIONS (TRANSACTION_ID, TRANSACTION_TYPE, ID_KINGDOM, UNIT_TYPE)
-        values (WAR_MASTER.TRANSAC_SEQ.nextval, 'CMP', p_kingdom, p_material);
+        insert into WAR_MASTER.TRANSACTIONS (TRANSACTION_ID, TRANSACTION_TYPE, ID_KINGDOM, UNIT_TYPE, AMOUNT, CROWNS)
+        values (WAR_MASTER.TRANSAC_SEQ.nextval, 'CMP', p_kingdom, p_material, p_amount_bought, 5);
 
     end;
