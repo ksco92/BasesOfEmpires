@@ -39,8 +39,9 @@ create table WAR_MASTER.TRANSACTIONS
         constraint TRANSAC_ID_TRANSAC_PK
         primary key,
     TRANSACTION_TYPE     VARCHAR2(15),
-    UNIT_TYPE            VARCHAR2(15),
-    AMOUNT               NUMBER,
+    GOLD                 NUMBER,
+    WOOD                 NUMBER       default 0,
+    IRON                 NUMBER       default 0,
     CROWNS               NUMBER,
     TRANSACTION_DATETIME TIMESTAMP(6) default CURRENT_TIMESTAMP,
     ID_KINGDOM           NUMBER
@@ -56,18 +57,30 @@ CREATE SEQUENCE WAR_MASTER.TRANSAC_SEQ
 To insert reinos.
 */
 
-insert into WAR_MASTER.KINGDOMS (ID_KINGDOM, NAME, MONTH) values (1, 'Acuario', 'Jan');
-insert into WAR_MASTER.KINGDOMS (ID_KINGDOM, NAME, MONTH) values (2, 'Piscis', 'Feb');
-insert into WAR_MASTER.KINGDOMS (ID_KINGDOM, NAME, MONTH) values (3, 'Aries', 'Mar');
-insert into WAR_MASTER.KINGDOMS (ID_KINGDOM, NAME, MONTH) values (4, 'Tauro', 'Apr');
-insert into WAR_MASTER.KINGDOMS (ID_KINGDOM, NAME, MONTH) values (5, 'Geminis', 'May');
-insert into WAR_MASTER.KINGDOMS (ID_KINGDOM, NAME, MONTH) values (6, 'Cancer', 'Jun');
-insert into WAR_MASTER.KINGDOMS (ID_KINGDOM, NAME, MONTH) values (7, 'Leo', 'Jul');
-insert into WAR_MASTER.KINGDOMS (ID_KINGDOM, NAME, MONTH) values (8, 'Virgo', 'Aug');
-insert into WAR_MASTER.KINGDOMS (ID_KINGDOM, NAME, MONTH) values (9, 'Libra', 'Sep');
-insert into WAR_MASTER.KINGDOMS (ID_KINGDOM, NAME, MONTH) values (10, 'Escorpio', 'Oct');
-insert into WAR_MASTER.KINGDOMS (ID_KINGDOM, NAME, MONTH) values (11, 'Sagitario', 'Nov');
-insert into WAR_MASTER.KINGDOMS (ID_KINGDOM, NAME, MONTH) values (12, 'Capricornio', 'Dec');
+insert into WAR_MASTER.KINGDOMS (ID_KINGDOM, NAME, MONTH)
+values (1, 'Acuario', 'Jan');
+insert into WAR_MASTER.KINGDOMS (ID_KINGDOM, NAME, MONTH)
+values (2, 'Piscis', 'Feb');
+insert into WAR_MASTER.KINGDOMS (ID_KINGDOM, NAME, MONTH)
+values (3, 'Aries', 'Mar');
+insert into WAR_MASTER.KINGDOMS (ID_KINGDOM, NAME, MONTH)
+values (4, 'Tauro', 'Apr');
+insert into WAR_MASTER.KINGDOMS (ID_KINGDOM, NAME, MONTH)
+values (5, 'Geminis', 'May');
+insert into WAR_MASTER.KINGDOMS (ID_KINGDOM, NAME, MONTH)
+values (6, 'Cancer', 'Jun');
+insert into WAR_MASTER.KINGDOMS (ID_KINGDOM, NAME, MONTH)
+values (7, 'Leo', 'Jul');
+insert into WAR_MASTER.KINGDOMS (ID_KINGDOM, NAME, MONTH)
+values (8, 'Virgo', 'Aug');
+insert into WAR_MASTER.KINGDOMS (ID_KINGDOM, NAME, MONTH)
+values (9, 'Libra', 'Sep');
+insert into WAR_MASTER.KINGDOMS (ID_KINGDOM, NAME, MONTH)
+values (10, 'Escorpio', 'Oct');
+insert into WAR_MASTER.KINGDOMS (ID_KINGDOM, NAME, MONTH)
+values (11, 'Sagitario', 'Nov');
+insert into WAR_MASTER.KINGDOMS (ID_KINGDOM, NAME, MONTH)
+values (12, 'Capricornio', 'Dec');
 
 /*
 -----------------------------------------------------
