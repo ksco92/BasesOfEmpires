@@ -1,4 +1,4 @@
-create or replace procedure WAR_MASTER.defences(p_defense VARCHAR2, p_amount NUMBER, p_kingdom NUMBER) as
+create or replace procedure WAR_MASTER.defensas(p_defense VARCHAR2, p_amount NUMBER, p_kingdom NUMBER) as
 
   v_wood        NUMBER;
   v_iron        NUMBER;
@@ -12,68 +12,90 @@ create or replace procedure WAR_MASTER.defences(p_defense VARCHAR2, p_amount NUM
   tp_wood       NUMBER;
   tp_iron       NUMBER;
   tp_gold       NUMBER;
+  tct_crowns	NYMBER;
   BEGIN
     SELECT
-      madera,
-      hierro,
-      oro,
-      coronas
+      wood,
+      iron,
+      gold,
+      crowns
     INTO v_wood, v_iron, v_gold, v_crowns
-    FROM war_master.reinos
-    WHERE id_reino = p_kingdom;
+    FROM war_master.kingdoms
+    WHERE id_kingdom = p_kingdom;
     SELECT
-      madera,
-      hierro,
-      oro,
-      precio_madera,
-      precio_hierro
+      wood,
+      iron,
+      gold,
+      wood_price,
+      iron_price
     INTO
       r_wood,
       r_iron,
       r_gold,
       r_wood_price,
       r_iron_price
-    FROM war_master.reserva_central;
+    FROM war_master.central_reserve;
     CASE p_defense
-      WHEN 'canons'
+      WHEN 'cannons'
       THEN
         tp_wood := 500;
         tp_iron := 2000;
         tp_gold := 1000;
 
-        UPDATE war_master.reinos
-        SET DEFENSA = DEFENSA + 450 * p_amount,
-          CORONAS   = CORONAS + 20 * p_amount
-        WHERE id_reino = p_kingdom;
+        UPDATE war_master.kingdoms
+        SET defense = defense + 450 * p_amount,
+          crowns   = crowns + 20 * p_amount
+        WHERE id_kingdom = p_kingdom;
+	tct_crowns := 20*p_amount;
       WHEN 'towers'
       THEN
         tp_wood := 1000;
         tp_iron := 800;
         tp_gold := 2000;
 
-        UPDATE war_master.reinos
-        SET DEFENSA = DEFENSA + 650 * p_amount,
-          CORONAS   = CORONAS + 15 * p_amount
-        WHERE id_reino = p_kingdom;
+        UPDATE war_master.kingdom
+        SET defense = defense + 650 * p_amount,
+          crowns   = crowns + 15 * p_amount
+        WHERE id_kingdom = p_kingdom;
+	tct_crowns := 20*p_amount;
 
     END CASE;
     IF v_wood >= tp_wood * p_amount AND v_iron >= tp_iron * p_amount AND v_gold >= tp_gold * p_amount
     THEN
-      UPDATE war_master.reinos
-      SET madera = v_wood - tp_wood * p_amount,
-        hierro   = v_iron - tp_iron * p_amount,
-        oro      = v_gold - tp_gold * p_amount
-      WHERE id_reino = p_kingdom;
+      UPDATE war_master.kingdoms
+      SET wood = v_wood - tp_wood * p_amount,
+        iron   = v_iron - tp_iron * p_amount,
+        gold      = v_gold - tp_gold * p_amount
+      WHERE id_kingdom = p_kingdom;
 
-      UPDATE war_master.reserva_central
-      SET precio_madera = r_wood_price - round(r_wood_price * (p_amount * tp_wood / r_wood), 2),
-        precio_hierro   = r_iron_price - round(r_iron_price * (p_amount * tp_iron / r_iron), 2),
-        madera          = r_wood + tp_wood * p_amount,
-        hierro          = r_iron + tp_iron * p_amount,
-        oro             = r_gold + tp_gold * p_amount;
+      UPDATE war_master.central_reserve
+      SET wood_price = r_wood_price - round(r_wood_price * (p_amount * tp_wood / r_wood), 2),
+        iron_price   = r_iron_price - round(r_iron_price * (p_amount * tp_iron / r_iron), 2),
+        wood          = r_wood + tp_wood * p_amount,
+        iron          = r_iron + tp_iron * p_amount,
+        gold             = r_gold + tp_gold * p_amount;
+
+      insert into WAR_MASTER.transactions(TRANSACTION_ID, TRANSACTION_TYPE, ID_KINGDOM, UNIT_TYPE, AMOUNT, CROWNS)
+      values (WAR_MASTER.TRANSAC_SEQ.nextval, 'DEF', p_kingdom,p_defense,p_amount,tct_crowns);
     ELSE
       DBMS_OUTPUT.PUT_LINE('NO tienes suficientes recursos para realizar la transaccion');
+      CASE p_defense
+      WHEN 'cannons'
+      THEN
+
+        UPDATE war_master.kingdoms
+        SET defense = defense - 450 * p_amount,
+          crowns   = crowns - 20 * p_amount
+        WHERE id_kingdom = p_kingdom;
+      WHEN 'towers'
+      THEN
+
+        UPDATE war_master.kingdom
+        SET defense = defense - 650 * p_amount,
+          crowns   = crowns - 15 * p_amount
+        WHERE id_kingdom = p_kingdom;
+
+    END CASE;
     END IF;
-    insert into WAR_MASTER.TRANSACCIONES values (WAR_MASTER.TRANSAC_SEQ.nextval, 'DEF', p_kingdom);
   END;
 /
