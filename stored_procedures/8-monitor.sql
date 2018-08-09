@@ -10,7 +10,6 @@ create or replace procedure war_master.monitor is
   cursor kds_cursor is
     select
       NAME,
-      GOLD +
       ((IRON * r_iron_price) * .5) +
       ((WOOD * r_wood_price) * .5) +
       ((ARCHERS * 20) * 1.5) +
