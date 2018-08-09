@@ -74,3 +74,36 @@ Allows the kingdom to build defenses. Follows these steps:
 * Adds the amount of crowns corresponding to the defense and the amount.
 * Adds the spent materials into the central reserve.
 * Decrese the central reserve price of the materials.
+
+### upgrade
+
+Receives the following parameters:
+* `upgrade_type -> varchar`
+* `kingdom_id -> number`
+
+Allows the kingdom to upgrade either it's base defense or attack.
+* Checks the upgrade type and substracts the amount of materials accordingly.
+* Boosts either the attack or the defense of the kingdom.
+* Adds the substracted materials to the central reserve and recalculates the prices.
+* Generate a transaction based on the upgrade type.
+
+### attack
+
+Receives the following parameters:
+* `attaking_kd_id -> number`
+* `defending_kd_id -> number`
+
+Allows a kingdom to attack another kingdom.
+* Checks if the attacking kingdom has enough gold to commence the attack.
+* Calculates the attack points of the attaking kingdom.
+* Calculates the defence points of the defending kingdom.
+* Compares the attack points and the defence points to see if the attack is succesful or not.
+* Calculates the losses and the rewards of the two kingdoms.
+* Generate a transaction of 'ATK' type.
+
+### monitor
+
+Provides an overall view of the state of the game.
+* Displays how much materials the central reserve has and its prices.
+* Displays a ranking of the kingdoms based on a calculation of its attack, defence, armies and crowns.
+* Displays a log with each transaction made.
