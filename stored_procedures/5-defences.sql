@@ -43,7 +43,7 @@ create or replace procedure WAR_MASTER.defences(p_defense VARCHAR2, p_amount NUM
         tp_gold := 1000;
 
         UPDATE war_master.kingdoms
-        SET defense = defense + 450 * p_amount,
+        SET CANNONS = CANNONS + p_amount,
           crowns   = crowns + 20 * p_amount
         WHERE id_kingdom = p_kingdom;
 	      tct_crowns := 20*p_amount;
@@ -54,7 +54,7 @@ create or replace procedure WAR_MASTER.defences(p_defense VARCHAR2, p_amount NUM
         tp_gold := 2000;
 
         UPDATE war_master.kingdoms
-        SET DEFENSE = defense + 650 * p_amount,
+        SET TOWERS = TOWERS + p_amount,
           crowns   = crowns + 15 * p_amount
         WHERE id_kingdom = p_kingdom;
 	      tct_crowns := 20*p_amount;
@@ -84,14 +84,14 @@ create or replace procedure WAR_MASTER.defences(p_defense VARCHAR2, p_amount NUM
       THEN
 
         UPDATE war_master.kingdoms
-        SET defense = defense - 450 * p_amount,
+        SET CANNONS = CANNONS - p_amount,
           crowns   = crowns - 20 * p_amount
         WHERE id_kingdom = p_kingdom;
       WHEN 'towers'
       THEN
 
         UPDATE war_master.KINGDOMS
-        SET defense = defense - 650 * p_amount,
+        SET TOWERS = TOWERS - p_amount,
           crowns   = crowns - 15 * p_amount
         WHERE id_kingdom = p_kingdom;
 
