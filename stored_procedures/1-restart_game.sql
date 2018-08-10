@@ -26,3 +26,4 @@ create or replace procedure WAR_MASTER.restart_game as
         execute immediate 'truncate table WAR_MASTER.TRANSACTIONS';
 
     end;
+/

@@ -55,3 +55,4 @@ create or replace procedure WAR_MASTER.buy(p_material varchar2, p_amount_bought 
         end case;
 
     end;
+/
