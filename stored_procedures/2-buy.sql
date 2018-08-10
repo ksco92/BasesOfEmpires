@@ -13,12 +13,12 @@ create or replace procedure WAR_MASTER.buy(p_material varchar2, p_amount_bought 
 
                 update WAR_MASTER . KINGDOMS
                 set WOOD   = WOOD + p_amount_bought,
-                    gold   = gold - p_material_price,
+                    gold   = gold - (p_material_price * p_amount_bought),
                     CROWNS = CROWNS + 5
                 where ID_KINGDOM = p_kingdom;
 
                 update WAR_MASTER . CENTRAL_RESERVE
-                set GOLD = GOLD + p_material_price,
+                set GOLD = GOLD + (p_material_price * p_amount_bought),
                     WOOD = WOOD - p_amount_bought;
 
                 p_material_price :=
@@ -36,12 +36,12 @@ create or replace procedure WAR_MASTER.buy(p_material varchar2, p_amount_bought 
 
                 update WAR_MASTER . KINGDOMS
                 set IRON   = IRON + p_amount_bought,
-                    gold   = gold - p_material_price,
+                    gold   = gold - (p_material_price * p_amount_bought),
                     CROWNS = CROWNS + 5
                 where ID_KINGDOM = p_kingdom;
 
                 update WAR_MASTER . CENTRAL_RESERVE
-                set GOLD = GOLD + p_material_price,
+                set GOLD = GOLD + (p_material_price * p_amount_bought),
                     IRON = IRON - p_amount_bought;
 
                 p_material_price :=
