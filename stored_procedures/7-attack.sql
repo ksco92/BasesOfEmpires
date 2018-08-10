@@ -4,8 +4,8 @@ create or replace procedure war_master.attack(attaking_kd_id number, defending_k
   gold_pot     number;
   wood_pot     number;
   iron_pot     number;
-  crowns_added number := 2;
   atk_kd_gold  number;
+  crowns_added number := 2;
   gold_cost    number := 1000;
   begin
 
@@ -16,16 +16,21 @@ create or replace procedure war_master.attack(attaking_kd_id number, defending_k
 
     if atk_kd_gold >= gold_cost
     then
-      select ((ARCHERS * 20) * .8) +
-             ((PIKEMEN * 30) * .8) +
-             ((KNIGHTS * 50) * .8) +
-             ((WIZARDS * 40) * .8) +
-             (ATTACK * .6)
+
+      update KINGDOMS
+      set GOLD = GOLD - gold_cost
+      where ID_KINGDOM = attaking_kd_id;
+
+      select trunc((ARCHERS * 20) * .8) +
+             trunc((PIKEMEN * 30) * .8) +
+             trunc((KNIGHTS * 50) * .8) +
+             trunc((WIZARDS * 40) * .8) +
+             round(ATTACK * .6)
       into total_av
       from war_master.KINGDOMS
       where ID_KINGDOM = attaking_kd_id;
 
-      select (DEFENSE * .7) +
+      select round(DEFENSE * .7) +
              (CANNONS * 450) +
              (TOWERS * 650)
       into total_dv
@@ -36,9 +41,9 @@ create or replace procedure war_master.attack(attaking_kd_id number, defending_k
       then
 
         select
-          GOLD * .65,
-          WOOD * .65,
-          IRON * .65
+          round(GOLD * .65, -2),
+          round(WOOD * .65),
+          round(IRON * .65)
         into
           gold_pot,
           wood_pot,
@@ -48,33 +53,33 @@ create or replace procedure war_master.attack(attaking_kd_id number, defending_k
 
         update war_master.KINGDOMS
         set
-          ARCHERS = ARCHERS * .7,
-          PIKEMEN = PIKEMEN * .7,
-          KNIGHTS = KNIGHTS * .7,
-          WIZARDS = WIZARDS * .7,
+          ARCHERS = trunc(ARCHERS * .7),
+          PIKEMEN = trunc(PIKEMEN * .7),
+          KNIGHTS = trunc(KNIGHTS * .7),
+          WIZARDS = trunc(WIZARDS * .7),
           GOLD    = GOLD + gold_pot,
           WOOD    = WOOD + wood_pot,
           IRON    = IRON + iron_pot,
-          ATTACK  = ATTACK * .5,
+          ATTACK  = round(ATTACK * .5),
           CROWNS  = CROWNS + crowns_added
         where ID_KINGDOM = attaking_kd_id;
 
         update war_master.KINGDOMS
         set
-          ARCHERS = ARCHERS * .8,
-          PIKEMEN = PIKEMEN * .8,
-          KNIGHTS = KNIGHTS * .8,
-          WIZARDS = WIZARDS * .8,
+          ARCHERS = trunc(ARCHERS * .8),
+          PIKEMEN = trunc(PIKEMEN * .8),
+          KNIGHTS = trunc(KNIGHTS * .8),
+          WIZARDS = trunc(WIZARDS * .8),
           GOLD    = GOLD - gold_pot,
           WOOD    = WOOD - wood_pot,
           IRON    = IRON - iron_pot,
-          DEFENSE = DEFENSE * .9,
-          TOWERS  = TOWERS * .75,
-          CANNONS = CANNONS * .75
+          DEFENSE = round(DEFENSE * .9),
+          TOWERS  = trunc(TOWERS * .75),
+          CANNONS = trunc(CANNONS * .75)
         where ID_KINGDOM = defending_kd_id;
 
       else
-        select GOLD * .30
+        select round(GOLD * .30, -2)
         into
           gold_pot
         from war_master.KINGDOMS
@@ -82,25 +87,25 @@ create or replace procedure war_master.attack(attaking_kd_id number, defending_k
 
         update war_master.KINGDOMS
         set
-          ARCHERS = ARCHERS * .6,
-          PIKEMEN = PIKEMEN * .6,
-          KNIGHTS = KNIGHTS * .6,
-          WIZARDS = WIZARDS * .6,
+          ARCHERS = trunc(ARCHERS * .6),
+          PIKEMEN = trunc(PIKEMEN * .6),
+          KNIGHTS = trunc(KNIGHTS * .6),
+          WIZARDS = trunc(WIZARDS * .6),
           GOLD    = GOLD - gold_pot,
-          ATTACK  = ATTACK * .8,
+          ATTACK  = round(ATTACK * .8),
           CROWNS  = CROWNS + crowns_added
         where ID_KINGDOM = attaking_kd_id;
 
         update war_master.KINGDOMS
         set
-          ARCHERS = ARCHERS * .8,
-          PIKEMEN = PIKEMEN * .8,
-          KNIGHTS = KNIGHTS * .8,
-          WIZARDS = WIZARDS * .8,
+          ARCHERS = trunc(ARCHERS * .8),
+          PIKEMEN = trunc(PIKEMEN * .8),
+          KNIGHTS = trunc(KNIGHTS * .8),
+          WIZARDS = trunc(WIZARDS * .8),
           GOLD    = GOLD + gold_pot,
-          DEFENSE = DEFENSE * .9,
-          TOWERS  = TOWERS * .75,
-          CANNONS = CANNONS * .75
+          DEFENSE = round(DEFENSE * .9),
+          TOWERS  = trunc(TOWERS * .75),
+          CANNONS = trunc(CANNONS * .75)
         where ID_KINGDOM = defending_kd_id;
       end if;
 
