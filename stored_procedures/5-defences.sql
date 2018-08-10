@@ -1,9 +1,9 @@
-create or replace procedure WAR_MASTER.defensas(p_defense VARCHAR2, p_amount NUMBER, p_kingdom NUMBER) as
+create or replace procedure WAR_MASTER.defences(p_defense VARCHAR2, p_amount NUMBER, p_kingdom NUMBER) as
 
   v_wood        NUMBER;
   v_iron        NUMBER;
   v_gold        NUMBER;
-  v_crowns	NUMBER;
+  v_crowns	    NUMBER;
   r_wood        NUMBER;
   r_iron        NUMBER;
   r_gold        NUMBER;
@@ -12,7 +12,7 @@ create or replace procedure WAR_MASTER.defensas(p_defense VARCHAR2, p_amount NUM
   tp_wood       NUMBER;
   tp_iron       NUMBER;
   tp_gold       NUMBER;
-  tct_crowns	NYMBER;
+  tct_crowns	  NUMBER;
   BEGIN
     SELECT
       wood,
@@ -43,21 +43,21 @@ create or replace procedure WAR_MASTER.defensas(p_defense VARCHAR2, p_amount NUM
         tp_gold := 1000;
 
         UPDATE war_master.kingdoms
-        SET defense = defense + 450 * p_amount,
+        SET CANNONS = CANNONS + p_amount,
           crowns   = crowns + 20 * p_amount
         WHERE id_kingdom = p_kingdom;
-	tct_crowns := 20*p_amount;
+	      tct_crowns := 20*p_amount;
       WHEN 'towers'
       THEN
         tp_wood := 1000;
         tp_iron := 800;
         tp_gold := 2000;
 
-        UPDATE war_master.kingdom
-        SET defense = defense + 650 * p_amount,
+        UPDATE war_master.kingdoms
+        SET TOWERS = TOWERS + p_amount,
           crowns   = crowns + 15 * p_amount
         WHERE id_kingdom = p_kingdom;
-	tct_crowns := 20*p_amount;
+	      tct_crowns := 20*p_amount;
 
     END CASE;
     IF v_wood >= tp_wood * p_amount AND v_iron >= tp_iron * p_amount AND v_gold >= tp_gold * p_amount
@@ -75,8 +75,8 @@ create or replace procedure WAR_MASTER.defensas(p_defense VARCHAR2, p_amount NUM
         iron          = r_iron + tp_iron * p_amount,
         gold             = r_gold + tp_gold * p_amount;
 
-      insert into WAR_MASTER.transactions(TRANSACTION_ID, TRANSACTION_TYPE, ID_KINGDOM, UNIT_TYPE, AMOUNT, CROWNS)
-      values (WAR_MASTER.TRANSAC_SEQ.nextval, 'DEF', p_kingdom,p_defense,p_amount,tct_crowns);
+      insert into WAR_MASTER.transactions(TRANSACTION_ID, TRANSACTION_TYPE, ID_KINGDOM, WOOD,IRON, GOLD, CROWNS)
+      values (WAR_MASTER.TRANSAC_SEQ.nextval, 'DEF', p_kingdom,tp_wood*p_amount,tp_iron*p_amount,tp_gold*p_amount,tct_crowns);
     ELSE
       DBMS_OUTPUT.PUT_LINE('NO tienes suficientes recursos para realizar la transaccion');
       CASE p_defense
@@ -84,14 +84,14 @@ create or replace procedure WAR_MASTER.defensas(p_defense VARCHAR2, p_amount NUM
       THEN
 
         UPDATE war_master.kingdoms
-        SET defense = defense - 450 * p_amount,
+        SET CANNONS = CANNONS - p_amount,
           crowns   = crowns - 20 * p_amount
         WHERE id_kingdom = p_kingdom;
       WHEN 'towers'
       THEN
 
-        UPDATE war_master.kingdom
-        SET defense = defense - 650 * p_amount,
+        UPDATE war_master.KINGDOMS
+        SET TOWERS = TOWERS - p_amount,
           crowns   = crowns - 15 * p_amount
         WHERE id_kingdom = p_kingdom;
 

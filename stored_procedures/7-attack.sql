@@ -119,3 +119,4 @@ create or replace procedure war_master.attack(attaking_kd_id number, defending_k
     end if;
 
   end;
+/

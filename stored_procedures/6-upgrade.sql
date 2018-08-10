@@ -108,3 +108,4 @@ create or replace procedure war_master.upgrade(upgrade_type VARCHAR2, kingdom_id
 
     end case;
   end;
+/

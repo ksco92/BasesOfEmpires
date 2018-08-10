@@ -13,12 +13,12 @@ create or replace procedure WAR_MASTER.sell(p_material varchar2, p_amount_sold n
 
                 update WAR_MASTER . KINGDOMS
                 set WOOD   = WOOD - p_amount_sold,
-                    gold   = gold + p_material_price,
+                    gold   = gold + (p_material_price * p_amount_sold),
                     CROWNS = CROWNS + 10
                 where ID_KINGDOM = p_kingdom;
 
                 update WAR_MASTER . CENTRAL_RESERVE
-                set GOLD = GOLD - p_material_price,
+                set GOLD = GOLD - (p_material_price * p_amount_sold),
                     WOOD = WOOD + p_amount_sold;
 
                 p_material_price :=
@@ -36,12 +36,12 @@ create or replace procedure WAR_MASTER.sell(p_material varchar2, p_amount_sold n
 
                 update WAR_MASTER . KINGDOMS
                 set IRON   = IRON - p_amount_sold,
-                    gold   = gold + p_material_price,
+                    gold   = gold + (p_material_price * p_amount_sold),
                     CROWNS = CROWNS + 10
                 where ID_KINGDOM = p_kingdom;
 
                 update WAR_MASTER . CENTRAL_RESERVE
-                set GOLD = GOLD - p_material_price,
+                set GOLD = GOLD - (p_material_price * p_amount_sold),
                     IRON = IRON + p_amount_sold;
 
                 p_material_price :=
@@ -55,3 +55,4 @@ create or replace procedure WAR_MASTER.sell(p_material varchar2, p_amount_sold n
         end case;
 
     end;
+/

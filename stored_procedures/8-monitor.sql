@@ -81,3 +81,4 @@ create or replace procedure war_master.monitor is
     end loop;
     dbms_output.put_line(rpad('-', 90, '-'));
   end;
+/
