@@ -1,0 +1,109 @@
+SQL> set lines 100
+SQL> set echo on
+SQL> set serveroutput on
+SQL> set pages 80
+SQL> exec war_master.restart_game
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.buy('MADERA',20000,1);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.buy('HIERRO',30000,1);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.buy('MADERA',12000,12);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.buy('HIERRO',10000,12);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('knight',10,11);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.buy('MADERA',15000,11);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('archers',40,10);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('mages',30,10);
+BEGIN war_master.train('mages',30,10); END;
+
+*
+ERROR at line 1:
+ORA-06592: CASE not found while executing CASE statement 
+ORA-06512: at "WAR_MASTER.TRAIN", line 39 
+ORA-06512: at line 1 
+
+
+SQL> exec war_master.train('wizards',30,10);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('pikemen',50,9);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.defences('towers',4,9);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.buy('HIERRO',6000,8);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.defences('cannons',6,8);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('knight',60,7);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('wizards',40,7);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.sell('HIERRO',4000,6);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.defences('towers',30,6);
+NO tienes suficientes recursos para realizar la transaccion                                         
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('archers',50,5);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('pikemen',50,5);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.defences('cannons',15,4);
+NO tienes suficientes recursos para realizar la transaccion                                         
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.upgrade('DEFENSE',4);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('pikemen',60,3);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.upgrade('ATTACK',3);
+
+PL/SQL procedure successfully completed.
+
+SQL> spool off
