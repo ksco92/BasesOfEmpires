@@ -60,7 +60,7 @@ create or replace procedure WAR_MASTER.defences(p_defense VARCHAR2, p_amount NUM
 	      tct_crowns := 20*p_amount;
 
     END CASE;
-    IF v_wood >= tp_wood * p_amount AND v_iron >= tp_iron * p_amount AND v_gold >= tp_gold * p_amount
+    IF v_wood >= tp_wood * p_amount AND v_iron >= tp_iron * p_amount AND v_gold >= tp_gold * p_amount AND p_amount > 0
     THEN
       UPDATE war_master.kingdoms
       SET wood = v_wood - tp_wood * p_amount,
@@ -78,7 +78,7 @@ create or replace procedure WAR_MASTER.defences(p_defense VARCHAR2, p_amount NUM
       insert into WAR_MASTER.transactions(TRANSACTION_ID, TRANSACTION_TYPE, ID_KINGDOM, WOOD,IRON, GOLD, CROWNS)
       values (WAR_MASTER.TRANSAC_SEQ.nextval, 'DEF', p_kingdom,tp_wood*p_amount,tp_iron*p_amount,tp_gold*p_amount,tct_crowns);
     ELSE
-      DBMS_OUTPUT.PUT_LINE('NO tienes suficientes recursos para realizar la transaccion');
+      DBMS_OUTPUT.PUT_LINE('NO tienes suficientes recursos para realizar la transaccion o la cantidad construida es invalida');
       CASE p_defense
       WHEN 'cannons'
       THEN

@@ -62,7 +62,7 @@ BEGIN
         tp_gold := 50;
 
     END CASE;
-    IF v_wood >= tp_wood * p_amount AND v_iron >= tp_iron * p_amount AND v_gold >= tp_gold * p_amount
+    IF v_wood >= tp_wood * p_amount AND v_iron >= tp_iron * p_amount AND v_gold >= tp_gold * p_amount AND p_amount > 0 
       THEN
         CASE p_troop
           WHEN 'archers'
@@ -112,6 +112,6 @@ BEGIN
         insert into WAR_MASTER.transactions(TRANSACTION_ID, TRANSACTION_TYPE, ID_KINGDOM, WOOD,IRON, GOLD, CROWNS)
         values (WAR_MASTER.TRANSAC_SEQ.nextval, 'TRP', p_kingdom, tp_wood*p_amount,tp_iron*p_amount,tp_gold*p_amount,tct_crowns);
     ELSE
-      dbms_output.put_line('You do not have enough materials to execute this transaction');
+      dbms_output.put_line('You do not have enough materials to execute this transaction or the amount trained is unvalid');
     END IF;
 END;
