@@ -65,7 +65,7 @@ create or replace procedure war_master.monitor is
     dbms_output.put_line(
         rpad('Reino', 12, ' ') || ' ' || rpad('Fecha/Hora', 30, ' ') || ' ' || rpad('Oro', 10, ' ') || ' ' ||
         rpad('Madera', 10, ' ') || ' '
-        || rpad('Hierro', 10, ' ') || ' ' || rpad('Coronas', 5, ' ') || ' ' || rpad('Tipo', 5, ' '));
+        || rpad('Hierro', 10, ' ') || ' ' || rpad('Coronas', 9, ' ') || ' ' || rpad('Tipo', 5, ' '));
     dbms_output.put_line(rpad('-', 90, '-'));
     for tr in trs_cursor
     loop
@@ -77,7 +77,7 @@ create or replace procedure war_master.monitor is
           rpad(kd_name, 12, ' ') || ' ' || rpad(tr.TRANSACTION_DATETIME, 30, ' ') || ' ' || rpad(tr.GOLD, 10, ' ') ||
           ' ' ||
           rpad(tr.WOOD, 10, ' ') || ' '
-          || rpad(tr.IRON, 10, ' ') || ' ' || rpad(tr.CROWNS, 5, ' ') || ' ' || rpad(tr.TRANSACTION_TYPE, 5, ' '));
+          || rpad(tr.IRON, 10, ' ') || ' ' || rpad(tr.CROWNS, 9, ' ') || ' ' || rpad(tr.TRANSACTION_TYPE, 5, ' '));
     end loop;
     dbms_output.put_line(rpad('-', 90, '-'));
   end;

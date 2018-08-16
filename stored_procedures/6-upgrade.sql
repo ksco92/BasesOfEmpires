@@ -27,7 +27,7 @@ create or replace procedure war_master.upgrade(upgrade_type VARCHAR2, kingdom_id
         iron_cost := 150;
         crowns_added := 40;
 
-        select (DEFENSE * 1.1) + 500
+        select round(DEFENSE * 1.1) + 500
         into stat_added
         from KINGDOMS
         where ID_KINGDOM = kingdom_id;
@@ -70,7 +70,7 @@ create or replace procedure war_master.upgrade(upgrade_type VARCHAR2, kingdom_id
         iron_cost := 200;
         crowns_added := 5;
 
-        select (ATTACK * 1.1) + 500
+        select round(ATTACK * 1.1) + 500
         into stat_added
         from KINGDOMS
         where ID_KINGDOM = kingdom_id;
