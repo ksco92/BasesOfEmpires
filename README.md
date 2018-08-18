@@ -14,7 +14,7 @@
     
 # Bases of empires
 
-This project is the final part of the "Database programming" course at UCenfotec. The purpose of the course is to learn how create functions, stored procedures and other database functionalities rather then just running SQL queries.
+This project is the final part of the "Database programming" course at UCenfotec. The purpose of the course is to learn how create functions, stored procedures and other database operations rather than just running SQL queries.
 
 The members of the group are:
 
