@@ -1,4 +1,4 @@
-create or replace procedure WAR_MASTER.defences(p_defense VARCHAR2, p_amount NUMBER, p_kingdom NUMBER) as
+create or replace procedure WAR_MASTER.defenses(p_defense VARCHAR2, p_amount NUMBER, p_kingdom NUMBER) as
 
   v_wood        NUMBER;
   v_iron        NUMBER;
