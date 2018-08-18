@@ -23,7 +23,7 @@ create or replace procedure WAR_MASTER.buy(p_material varchar2, p_amount_bought 
                     into p_reserve_material, p_material_price
                     from WAR_MASTER.CENTRAL_RESERVE;
 
-                    if p_kingdom_gold < (p_material_price * p_amount_bought)
+                    if p_kingdom_gold > (p_material_price * p_amount_bought)
                     then
                         update WAR_MASTER.KINGDOMS
                         set WOOD   = WOOD + p_amount_bought,
@@ -57,7 +57,7 @@ create or replace procedure WAR_MASTER.buy(p_material varchar2, p_amount_bought 
                     into p_reserve_material, p_material_price
                     from WAR_MASTER.CENTRAL_RESERVE;
 
-                    if p_kingdom_gold < (p_material_price * p_amount_bought)
+                    if p_kingdom_gold > (p_material_price * p_amount_bought)
                     then
                         update WAR_MASTER.KINGDOMS
                         set IRON   = IRON + p_amount_bought,
