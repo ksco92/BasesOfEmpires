@@ -1,249 +1,618 @@
+SQL> exec war_master.restart_game
+
+PL/SQL procedure successfully completed.
+
 SQL> exec war_master.buy('MADERA',20000,1);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.buy('HIERRO',30000,1);
 No tiene suficiente oro para completar la transaccion.                                              
 
 PL/SQL procedure successfully completed.
 
-SQL> select * from kingdoms where id_kingdom = 1;
+SQL> exec war_master.buy('MADERA',12000,12);
 
-ID_KINGDOM NAME                                                                                     
----------- --------------------                                                                     
-LOGO                                                                                                
-----------------------------------------------------------------------------------------------------
-MON       GOLD       IRON       WOOD    DEFENSE     ATTACK    ARCHERS    PIKEMEN    KNIGHTS         
---- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ----------         
-   WIZARDS     CROWNS     TOWERS    CANNONS                                                         
----------- ---------- ---------- ----------                                                         
-         1 Acuario                                                                                  
-                                                                                                    
-Jan      40000      10000      20000          0          0          0          0          0         
-         0          0          0          0                                                         
-                                                                                                    
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.buy('HIERRO',10000,12);
+No tiene suficiente oro para completar la transaccion.                                              
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('knight',10,11);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.buy('MADERA',15000,11);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('archers',40,10);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('wizards',30,10);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('pikemen',50,9);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.defences('towers',4,9);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.buy('HIERRO',6000,8);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.defences('cannons',6,8);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('knight',60,7);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('wizards',40,7);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.sell('HIERRO',4000,6);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.defences('towers',30,6);
+NO tienes suficientes recursos para realizar la transaccion o la cantidad construida es invalida    
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('archers',50,5);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('pikemen',50,5);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.defences('cannons',15,4);
+NO tienes suficientes recursos para realizar la transaccion o la cantidad construida es invalida    
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.upgrade('DEFENSE',4);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('pikemen',60,3);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.upgrade('ATTACK',3);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('archers',0,2);
+You do not have enough materials to execute this transaction or the amount trained is unvalid       
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('pikemen',0,2);
+You do not have enough materials to execute this transaction or the amount trained is unvalid       
+
+PL/SQL procedure successfully completed.
 
 SQL> exec war_master.monitor
 Reserva Central                                                                                     
 -----------------------------------                                                                 
-Cantidad de oro:     5000000                                                                        
-Cantidad de madera:  2000000                                                                        
-Cantidad de hierro:  2000000                                                                        
-Precio de la madera: 2                                                                              
-Precio del hierro:   4                                                                              
+Cantidad de oro:     5136680                                                                        
+Cantidad de madera:  1985500                                                                        
+Cantidad de hierro:  2032350                                                                        
+Precio de la madera: 2,05                                                                           
+Precio del hierro:   3,94                                                                           
 -----------------------------------                                                                 
 Ranking de reinos                                                                                   
 --------------------------------------------------                                                  
-Reino: Acuario              Puntaje: 40000                                                          
-Reino: Piscis               Puntaje: 40000                                                          
-Reino: Aries                Puntaje: 40000                                                          
-Reino: Tauro                Puntaje: 40000                                                          
-Reino: Geminis              Puntaje: 40000                                                          
-Reino: Capricornio          Puntaje: 40000                                                          
-Reino: Leo                  Puntaje: 40000                                                          
-Reino: Virgo                Puntaje: 40000                                                          
-Reino: Libra                Puntaje: 40000                                                          
-Reino: Escorpio             Puntaje: 40000                                                          
-Reino: Sagitario            Puntaje: 40000                                                          
-Reino: Cancer               Puntaje: 40000                                                          
+Reino: Acuario              Puntaje: 60750                                                          
+Reino: Sagitario            Puntaje: 56829                                                          
+Reino: Capricornio          Puntaje: 52550                                                          
+Reino: Leo                  Puntaje: 44834                                                          
+Reino: Tauro                Puntaje: 40702                                                          
+Reino: Piscis               Puntaje: 40200                                                          
+Reino: Escorpio             Puntaje: 33005,5                                                        
+Reino: Aries                Puntaje: 32701,5                                                        
+Reino: Cancer               Puntaje: 32420                                                          
+Reino: Geminis              Puntaje: 27512,5                                                        
+Reino: Virgo                Puntaje: 26555                                                          
+Reino: Libra                Puntaje: 24273,5                                                        
 --------------------------------------------------                                                  
 Bitacora                                                                                            
 Reino        Fecha/Hora                     Oro        Madera     Hierro     Coronas   Tipo         
 ------------------------------------------------------------------------------------------          
+Acuario      19/08/18 08:54:28,621000 PM     20000      0          5         CMP                    
+Capricornio  19/08/18 08:54:47,877000 PM     12000      0          5         CMP                    
+Sagitario    19/08/18 08:55:12,075000 PM    1000       200        300        50        TRP          
+Sagitario    19/08/18 08:57:16,032000 PM     15000      0          5         CMP                    
+Escorpio     19/08/18 08:57:23,234000 PM    800        4000       1600       80        TRP          
+Escorpio     19/08/18 08:57:34,875000 PM    1500       1500       1500       30        TRP          
+Libra        19/08/18 08:57:44,492000 PM    1250       3500       3000       150       TRP          
+Libra        19/08/18 08:57:50,755000 PM    8000       4000       3200       80        DEF          
+Virgo        19/08/18 08:57:58,081000 PM     0          6000       5         CMP                    
+Virgo        19/08/18 08:58:03,880000 PM    6000       3000       12000      120       DEF          
+Leo          19/08/18 08:58:10,861000 PM    6000       1200       1800       300       TRP          
+Leo          19/08/18 08:58:18,061000 PM    2000       2000       2000       40        TRP          
+Cancer       19/08/18 08:58:25,236000 PM     0          4000       10        VTA                    
+Geminis      19/08/18 08:58:42,290000 PM    1000       5000       2000       100       TRP          
+Geminis      19/08/18 08:58:50,676000 PM    1250       3500       3000       150       TRP          
+Tauro        19/08/18 08:59:08,986000 PM    2000       100        150        40        M+D          
+Aries        19/08/18 08:59:15,056000 PM    1500       4200       3600       180       TRP          
+Aries        19/08/18 08:59:21,248000 PM    1500       300        200        5         M+A          
 ------------------------------------------------------------------------------------------          
 
 PL/SQL procedure successfully completed.
 
-SQL> start stored_procedures/2-buy
-SQL> create or replace procedure WAR_MASTER.buy(p_material varchar2, p_amount_bought number, p_kingdom number) as
-  2  
-  3  	 p_reserve_material number;
-  4  	 p_material_price   number(10, 3);
-  5  	 p_kingdom_gold     number;
-  6  
-  7  	 begin
-  8  
-  9  	     select GOLD
- 10  	     into p_kingdom_gold
- 11  	     from WAR_MASTER.KINGDOMS
- 12  	     where ID_KINGDOM = p_kingdom;
- 13  
- 14  	     if p_amount_bought > 0
- 15  	     then
- 16  
- 17  		 case p_material
- 18  		     when 'MADERA'
- 19  		     then
- 20  			 select
- 21  			     WOOD,
- 22  			     WOOD_PRICE
- 23  			 into p_reserve_material, p_material_price
- 24  			 from WAR_MASTER.CENTRAL_RESERVE;
- 25  
- 26  			 if p_kingdom_gold >= (p_material_price * p_amount_bought)
- 27  			 then
- 28  			     update WAR_MASTER.KINGDOMS
- 29  			     set WOOD	= WOOD + p_amount_bought,
- 30  				 gold	= gold - (p_material_price * p_amount_bought),
- 31  				 CROWNS = CROWNS + 5
- 32  			     where ID_KINGDOM = p_kingdom;
- 33  
- 34  			     update WAR_MASTER.CENTRAL_RESERVE
- 35  			     set GOLD = GOLD + (p_material_price * p_amount_bought),
- 36  				 WOOD = WOOD - p_amount_bought;
- 37  
- 38  			     p_material_price :=
- 39  			     p_material_price + (p_material_price * round(p_amount_bought / p_reserve_material, 2));
- 40  
- 41  			     update WAR_MASTER.CENTRAL_RESERVE
- 42  			     set WOOD_PRICE = p_material_price;
- 43  
- 44  			     insert into WAR_MASTER.TRANSACTIONS (TRANSACTION_ID, TRANSACTION_TYPE, ID_KINGDOM, WOOD, CROWNS)
- 45  			     values (WAR_MASTER.TRANSAC_SEQ.nextval, 'CMP', p_kingdom, p_amount_bought, 5);
- 46  
- 47  			 else
- 48  			     dbms_output.put_line('No tiene suficiente oro para completar la transaccion.');
- 49  			 end if;
- 50  
- 51  
- 52  		     when 'HIERRO'
- 53  		     then
- 54  			 select
- 55  			     IRON,
- 56  			     IRON_PRICE
- 57  			 into p_reserve_material, p_material_price
- 58  			 from WAR_MASTER.CENTRAL_RESERVE;
- 59  
- 60  			 if p_kingdom_gold >= (p_material_price * p_amount_bought)
- 61  			 then
- 62  			     update WAR_MASTER.KINGDOMS
- 63  			     set IRON	= IRON + p_amount_bought,
- 64  				 gold	= gold - (p_material_price * p_amount_bought),
- 65  				 CROWNS = CROWNS + 5
- 66  			     where ID_KINGDOM = p_kingdom;
- 67  
- 68  			     update WAR_MASTER.CENTRAL_RESERVE
- 69  			     set GOLD = GOLD + (p_material_price * p_amount_bought),
- 70  				 IRON = IRON - p_amount_bought;
- 71  
- 72  			     p_material_price :=
- 73  			     p_material_price + (p_material_price * round(p_amount_bought / p_reserve_material, 2));
- 74  
- 75  			     update WAR_MASTER.CENTRAL_RESERVE
- 76  			     set IRON_PRICE = p_material_price;
- 77  
- 78  			     insert into WAR_MASTER.TRANSACTIONS (TRANSACTION_ID, TRANSACTION_TYPE, ID_KINGDOM, IRON, CROWNS)
- 79  			     values (WAR_MASTER.TRANSAC_SEQ.nextval, 'CMP', p_kingdom, p_amount_bought, 5);
- 80  			 else
- 81  			     dbms_output.put_line('No tiene suficiente oro para completar la transaccion.');
- 82  			 end if;
- 83  
- 84  
- 85  		 end case;
- 86  
- 87  	     else
- 88  		 dbms_output.put_line('La cantidad a comprar debe ser mayor que 0.');
- 89  
- 90  	     end if;
- 91  
- 92  	 end;
- 93  /
+SQL> exec war_master.defences('cannons',10,1);
+NO tienes suficientes recursos para realizar la transaccion o la cantidad construida es invalida    
 
-Procedure created.
+PL/SQL procedure successfully completed.
 
-SQL> start stored_procedures/3-sell
-SQL> create or replace procedure WAR_MASTER.sell(p_material varchar2, p_amount_sold number, p_kingdom number) as
-  2  
-  3  	 p_reserve_material number;
-  4  	 p_material_price   number(10, 3);
-  5  	 p_kingdom_material number;
-  6  
-  7  	 begin
-  8  
-  9  	     if p_amount_sold > 0
- 10  	     then
- 11  
- 12  		 case p_material
- 13  		     when 'MADERA'
- 14  		     then
- 15  			 select
- 16  			     WOOD,
- 17  			     WOOD_PRICE
- 18  			 into p_reserve_material, p_material_price
- 19  			 from WAR_MASTER.CENTRAL_RESERVE;
- 20  
- 21  			 select WOOD
- 22  			 into p_kingdom_material
- 23  			 from WAR_MASTER.KINGDOMS
- 24  			 where ID_KINGDOM = p_kingdom;
- 25  
- 26  			 if p_kingdom_material >= p_amount_sold
- 27  			 then
- 28  			     update WAR_MASTER.KINGDOMS
- 29  			     set WOOD	= WOOD - p_amount_sold,
- 30  				 gold	= gold + (p_material_price * p_amount_sold),
- 31  				 CROWNS = CROWNS + 10
- 32  			     where ID_KINGDOM = p_kingdom;
- 33  
- 34  			     update WAR_MASTER.CENTRAL_RESERVE
- 35  			     set GOLD = GOLD - (p_material_price * p_amount_sold),
- 36  				 WOOD = WOOD + p_amount_sold;
- 37  
- 38  			     p_material_price :=
- 39  			     p_material_price - (p_material_price * round(p_amount_sold / p_reserve_material, 2));
- 40  
- 41  			     update WAR_MASTER.CENTRAL_RESERVE
- 42  			     set WOOD_PRICE = p_material_price;
- 43  
- 44  			     insert into WAR_MASTER.TRANSACTIONS (TRANSACTION_ID, TRANSACTION_TYPE, ID_KINGDOM, WOOD, CROWNS)
- 45  			     values (WAR_MASTER.TRANSAC_SEQ.nextval, 'VTA', p_kingdom, p_amount_sold, 10);
- 46  			 else
- 47  			     dbms_output.put_line('No tiene suficientes recursos para vender');
- 48  			 end if;
- 49  
- 50  
- 51  		     when 'HIERRO'
- 52  		     then
- 53  			 select
- 54  			     IRON,
- 55  			     IRON_PRICE
- 56  			 into p_reserve_material, p_material_price
- 57  			 from WAR_MASTER.CENTRAL_RESERVE;
- 58  
- 59  			 select IRON
- 60  			 into p_kingdom_material
- 61  			 from WAR_MASTER.KINGDOMS
- 62  			 where ID_KINGDOM = p_kingdom;
- 63  
- 64  			 if p_kingdom_material >= p_amount_sold
- 65  			 then
- 66  			     update WAR_MASTER.KINGDOMS
- 67  			     set IRON	= IRON - p_amount_sold,
- 68  				 gold	= gold + (p_material_price * p_amount_sold),
- 69  				 CROWNS = CROWNS + 10
- 70  			     where ID_KINGDOM = p_kingdom;
- 71  
- 72  			     update WAR_MASTER.CENTRAL_RESERVE
- 73  			     set GOLD = GOLD - (p_material_price * p_amount_sold),
- 74  				 IRON = IRON + p_amount_sold;
- 75  
- 76  			     p_material_price :=
- 77  			     p_material_price - (p_material_price * round(p_amount_sold / p_reserve_material, 2));
- 78  
- 79  			     update WAR_MASTER.CENTRAL_RESERVE
- 80  			     set IRON_PRICE = p_material_price;
- 81  
- 82  			     insert into WAR_MASTER.TRANSACTIONS (TRANSACTION_ID, TRANSACTION_TYPE, ID_KINGDOM, IRON, CROWNS)
- 83  			     values (WAR_MASTER.TRANSAC_SEQ.nextval, 'VTA', p_kingdom, p_amount_sold, 10);
- 84  			 else
- 85  			     dbms_output.put_line('No tiene suficientes recursos para vender');
- 86  			 end if;
- 87  
- 88  		 end case;
- 89  
- 90  	     else
- 91  		 dbms_output.put_line('La cantidad a vender debe ser mayor que 0.');
- 92  	     end if;
- 93  
- 94  	 end;
- 95  /
+SQL> exec war_master.defences('towers',10,1);
+NO tienes suficientes recursos para realizar la transaccion o la cantidad construida es invalida    
 
-Procedure created.
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('archers',60,12);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('knight',40,12);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('wizards',10,11);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.upgrade('ATTACK',11);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.upgrade('ATTACK',10);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.upgrade('ATTACK',10);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('wizards',20,9);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.upgrade('DEFENSE',9);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.defences('cannons',20,8);
+NO tienes suficientes recursos para realizar la transaccion o la cantidad construida es invalida    
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.upgrade('DEFENSE',8)
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('pikemen',40,7);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.upgrade('ATTACK',7);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.defences('cannons',25,6);
+NO tienes suficientes recursos para realizar la transaccion o la cantidad construida es invalida    
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.upgrade('DEFENSE',6);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('wizards',20,5);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('knight',30,5);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.sell('HIERRO',50000,4);
+No tiene suficientes recursos para vender                                                           
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.sell('MADERA',50000,4);
+No tiene suficientes recursos para vender                                                           
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('archers',60,3);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('wizards',30,3);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.upgrade('ATTACK',2);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('knight',35,2);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.monitor
+Reserva Central                                                                                     
+-----------------------------------                                                                 
+Cantidad de oro:     5168080                                                                        
+Cantidad de madera:  2008200                                                                        
+Cantidad de hierro:  2048150                                                                        
+Precio de la madera: 2,03                                                                           
+Precio del hierro:   3,94                                                                           
+-----------------------------------                                                                 
+Ranking de reinos                                                                                   
+--------------------------------------------------                                                  
+Reino: Acuario              Puntaje: 60350                                                          
+Reino: Sagitario            Puntaje: 55690                                                          
+Reino: Capricornio          Puntaje: 49236                                                          
+Reino: Piscis               Puntaje: 44072,5                                                        
+Reino: Tauro                Puntaje: 40503                                                          
+Reino: Leo                  Puntaje: 39647,5                                                        
+Reino: Cancer               Puntaje: 32723                                                          
+Reino: Escorpio             Puntaje: 32613,5                                                        
+Reino: Geminis              Puntaje: 29730,5                                                        
+Reino: Virgo                Puntaje: 26888                                                          
+Reino: Libra                Puntaje: 23366,5                                                        
+Reino: Aries                Puntaje: 22801                                                          
+--------------------------------------------------                                                  
+Bitacora                                                                                            
+Reino        Fecha/Hora                     Oro        Madera     Hierro     Coronas   Tipo         
+------------------------------------------------------------------------------------------          
+Acuario      19/08/18 08:54:28,621000 PM     20000      0          5         CMP                    
+Capricornio  19/08/18 08:54:47,877000 PM     12000      0          5         CMP                    
+Sagitario    19/08/18 08:55:12,075000 PM    1000       200        300        50        TRP          
+Sagitario    19/08/18 08:57:16,032000 PM     15000      0          5         CMP                    
+Escorpio     19/08/18 08:57:23,234000 PM    800        4000       1600       80        TRP          
+Escorpio     19/08/18 08:57:34,875000 PM    1500       1500       1500       30        TRP          
+Libra        19/08/18 08:57:44,492000 PM    1250       3500       3000       150       TRP          
+Libra        19/08/18 08:57:50,755000 PM    8000       4000       3200       80        DEF          
+Virgo        19/08/18 08:57:58,081000 PM     0          6000       5         CMP                    
+Virgo        19/08/18 08:58:03,880000 PM    6000       3000       12000      120       DEF          
+Leo          19/08/18 08:58:10,861000 PM    6000       1200       1800       300       TRP          
+Leo          19/08/18 08:58:18,061000 PM    2000       2000       2000       40        TRP          
+Cancer       19/08/18 08:58:25,236000 PM     0          4000       10        VTA                    
+Geminis      19/08/18 08:58:42,290000 PM    1000       5000       2000       100       TRP          
+Geminis      19/08/18 08:58:50,676000 PM    1250       3500       3000       150       TRP          
+Tauro        19/08/18 08:59:08,986000 PM    2000       100        150        40        M+D          
+Aries        19/08/18 08:59:15,056000 PM    1500       4200       3600       180       TRP          
+Aries        19/08/18 08:59:21,248000 PM    1500       300        200        5         M+A          
+Capricornio  19/08/18 09:02:15,067000 PM    1200       6000       2400       120       TRP          
+Capricornio  19/08/18 09:02:24,256000 PM    4000       800        1200       200       TRP          
+Sagitario    19/08/18 09:02:30,641000 PM    500        500        500        10        TRP          
+Sagitario    19/08/18 09:02:36,866000 PM    1500       300        200        5         M+A          
+Escorpio     19/08/18 09:02:42,952000 PM    1500       300        200        5         M+A          
+Escorpio     19/08/18 09:02:48,883000 PM    1500       300        200        5         M+A          
+Libra        19/08/18 09:02:55,070000 PM    1000       1000       1000       20        TRP          
+Libra        19/08/18 09:03:02,158000 PM    2000       100        150        40        M+D          
+Virgo        19/08/18 09:03:18,740000 PM    2000       100        150        40        M+D          
+Leo          19/08/18 09:03:25,693000 PM    1000       2800       2400       120       TRP          
+Leo          19/08/18 09:03:31,286000 PM    1500       300        200        5         M+A          
+Cancer       19/08/18 09:03:42,940000 PM    2000       100        150        40        M+D          
+Geminis      19/08/18 09:03:50,689000 PM    1000       1000       1000       20        TRP          
+Geminis      19/08/18 09:03:57,195000 PM    3000       600        900        150       TRP          
+Aries        19/08/18 09:04:47,536000 PM    1200       6000       2400       120       TRP          
+Aries        19/08/18 09:04:57,053000 PM    1500       1500       1500       30        TRP          
+Piscis       19/08/18 09:05:09,185000 PM    1500       300        200        5         M+A          
+Piscis       19/08/18 09:05:29,514000 PM    3500       700        1050       175       TRP          
+------------------------------------------------------------------------------------------          
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.upgrade('DEFENSE',1);
+Need at least 2000 gold, 100 wood and 150 iron to improve a kingdoms defense.                       
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.upgrade('DEFENSE',1);
+Need at least 2000 gold, 100 wood and 150 iron to improve a kingdoms defense.                       
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.upgrade('ATTACK',12);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.attack(12,7);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.upgrade('ATTACK',11);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.attack(11,10);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('wizards',30,10);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.attack(10,6);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.attack(9,11);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.upgrade('DEFENSE',9);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.upgrade('DEFENSE',8);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.sell('HIERRO',2000,8);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.attack(7,1);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.attack(7,5);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.defences('towers',10,6);
+NO tienes suficientes recursos para realizar la transaccion o la cantidad construida es invalida    
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.defences('cannons',10,6);
+NO tienes suficientes recursos para realizar la transaccion o la cantidad construida es invalida    
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.upgrade('ATTACK',5);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.defences('cannons',10,5);
+NO tienes suficientes recursos para realizar la transaccion o la cantidad construida es invalida    
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.attack(5,9);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.defences('towers',20,4);
+NO tienes suficientes recursos para realizar la transaccion o la cantidad construida es invalida    
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.upgrade('DEFENSE',4);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.attack(3,8);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.attack(3,8);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.upgrade('ATTACK',2);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.attack(2,6);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.monitor
+Reserva Central                                                                                     
+-----------------------------------                                                                 
+Cantidad de oro:     5173700                                                                        
+Cantidad de madera:  2011200                                                                        
+Cantidad de hierro:  2052900                                                                        
+Precio de la madera: 2,03                                                                           
+Precio del hierro:   3,94                                                                           
+-----------------------------------                                                                 
+Ranking de reinos                                                                                   
+--------------------------------------------------                                                  
+Reino: Leo                  Puntaje: 66997,7                                                        
+Reino: Capricornio          Puntaje: 60165,875                                                      
+Reino: Geminis              Puntaje: 54415,1                                                        
+Reino: Piscis               Puntaje: 49035,975                                                      
+Reino: Tauro                Puntaje: 41056                                                          
+Reino: Aries                Puntaje: 37075,87                                                       
+Reino: Escorpio             Puntaje: 31043,16                                                       
+Reino: Libra                Puntaje: 27383,015                                                      
+Reino: Sagitario            Puntaje: 26582,585                                                      
+Reino: Acuario              Puntaje: 21155                                                          
+Reino: Virgo                Puntaje: 5499,63                                                        
+Reino: Cancer               Puntaje: 4790,09                                                        
+--------------------------------------------------                                                  
+Bitacora                                                                                            
+Reino        Fecha/Hora                     Oro        Madera     Hierro     Coronas   Tipo         
+------------------------------------------------------------------------------------------          
+Acuario      19/08/18 08:54:28,621000 PM     20000      0          5         CMP                    
+Capricornio  19/08/18 08:54:47,877000 PM     12000      0          5         CMP                    
+Sagitario    19/08/18 08:55:12,075000 PM    1000       200        300        50        TRP          
+Sagitario    19/08/18 08:57:16,032000 PM     15000      0          5         CMP                    
+Escorpio     19/08/18 08:57:23,234000 PM    800        4000       1600       80        TRP          
+Escorpio     19/08/18 08:57:34,875000 PM    1500       1500       1500       30        TRP          
+Libra        19/08/18 08:57:44,492000 PM    1250       3500       3000       150       TRP          
+Libra        19/08/18 08:57:50,755000 PM    8000       4000       3200       80        DEF          
+Virgo        19/08/18 08:57:58,081000 PM     0          6000       5         CMP                    
+Virgo        19/08/18 08:58:03,880000 PM    6000       3000       12000      120       DEF          
+Leo          19/08/18 08:58:10,861000 PM    6000       1200       1800       300       TRP          
+Leo          19/08/18 08:58:18,061000 PM    2000       2000       2000       40        TRP          
+Cancer       19/08/18 08:58:25,236000 PM     0          4000       10        VTA                    
+Geminis      19/08/18 08:58:42,290000 PM    1000       5000       2000       100       TRP          
+Geminis      19/08/18 08:58:50,676000 PM    1250       3500       3000       150       TRP          
+Tauro        19/08/18 08:59:08,986000 PM    2000       100        150        40        M+D          
+Aries        19/08/18 08:59:15,056000 PM    1500       4200       3600       180       TRP          
+Aries        19/08/18 08:59:21,248000 PM    1500       300        200        5         M+A          
+Capricornio  19/08/18 09:02:15,067000 PM    1200       6000       2400       120       TRP          
+Capricornio  19/08/18 09:02:24,256000 PM    4000       800        1200       200       TRP          
+Sagitario    19/08/18 09:02:30,641000 PM    500        500        500        10        TRP          
+Sagitario    19/08/18 09:02:36,866000 PM    1500       300        200        5         M+A          
+Escorpio     19/08/18 09:02:42,952000 PM    1500       300        200        5         M+A          
+Escorpio     19/08/18 09:02:48,883000 PM    1500       300        200        5         M+A          
+Libra        19/08/18 09:02:55,070000 PM    1000       1000       1000       20        TRP          
+Libra        19/08/18 09:03:02,158000 PM    2000       100        150        40        M+D          
+Virgo        19/08/18 09:03:18,740000 PM    2000       100        150        40        M+D          
+Leo          19/08/18 09:03:25,693000 PM    1000       2800       2400       120       TRP          
+Leo          19/08/18 09:03:31,286000 PM    1500       300        200        5         M+A          
+Cancer       19/08/18 09:03:42,940000 PM    2000       100        150        40        M+D          
+Geminis      19/08/18 09:03:50,689000 PM    1000       1000       1000       20        TRP          
+Geminis      19/08/18 09:03:57,195000 PM    3000       600        900        150       TRP          
+Aries        19/08/18 09:04:47,536000 PM    1200       6000       2400       120       TRP          
+Aries        19/08/18 09:04:57,053000 PM    1500       1500       1500       30        TRP          
+Piscis       19/08/18 09:05:09,185000 PM    1500       300        200        5         M+A          
+Piscis       19/08/18 09:05:29,514000 PM    3500       700        1050       175       TRP          
+Capricornio  19/08/18 09:07:14,230000 PM    1500       300        200        5         M+A          
+Capricornio  19/08/18 09:08:11,190000 PM    1000       0          0          2         ATK          
+Sagitario    19/08/18 09:08:19,479000 PM    1500       300        200        5         M+A          
+Sagitario    19/08/18 09:08:28,494000 PM    1000       0          0          2         ATK          
+Escorpio     19/08/18 09:08:48,109000 PM    1500       1500       1500       30        TRP          
+Escorpio     19/08/18 09:09:07,504000 PM    1000       0          0          2         ATK          
+Libra        19/08/18 09:09:25,398000 PM    1000       0          0          2         ATK          
+Libra        19/08/18 09:09:39,451000 PM    2000       100        150        40        M+D          
+Virgo        19/08/18 09:09:44,776000 PM    2000       100        150        40        M+D          
+Virgo        19/08/18 09:10:12,307000 PM     0          2000       10        VTA                    
+Leo          19/08/18 09:10:25,658000 PM    1000       0          0          2         ATK          
+Leo          19/08/18 09:10:33,384000 PM    1000       0          0          2         ATK          
+Geminis      19/08/18 09:11:31,961000 PM    1500       300        200        5         M+A          
+Geminis      19/08/18 09:12:07,968000 PM    1000       0          0          2         ATK          
+Tauro        19/08/18 09:12:45,942000 PM    2000       100        150        40        M+D          
+Aries        19/08/18 09:12:59,209000 PM    1000       0          0          2         ATK          
+Aries        19/08/18 09:13:00,802000 PM    1000       0          0          2         ATK          
+Piscis       19/08/18 09:13:10,475000 PM    1500       300        200        5         M+A          
+Piscis       19/08/18 09:13:22,751000 PM    1000       0          0          2         ATK          
+------------------------------------------------------------------------------------------          
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.upgrade('DEFENSE',1);
+Need at least 2000 gold, 100 wood and 150 iron to improve a kingdoms defense.                       
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.defences('towers',20,1);
+NO tienes suficientes recursos para realizar la transaccion o la cantidad construida es invalida    
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('wizards',30,12);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.attack(12,7);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('knight',25,11);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.attack(11,12);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('wizards',20,10);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.attack(10,9);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('wizards',20,9);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.attack(9,10);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.buy('MADERA',5000,8);
+No tiene suficiente oro para completar la transaccion.                                              
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.defences('towers',15,8);
+NO tienes suficientes recursos para realizar la transaccion o la cantidad construida es invalida    
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.train('knight',20,7);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.attack(7,5);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.upgrade('DEFENSE',6);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.attack(6,9);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.upgrade('ATTACK',5);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.attack(5,7);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.defences('cannons',12,4);
+NO tienes suficientes recursos para realizar la transaccion o la cantidad construida es invalida    
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.defences('towers',8,4);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.attack(3,5);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.attack(3,4);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.attack(2,3);
+
+PL/SQL procedure successfully completed.
+
+SQL> exec war_master.attack(2,8);
+
+PL/SQL procedure successfully completed.
 
 SQL> spool off
