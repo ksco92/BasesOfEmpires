@@ -1,0 +1,249 @@
+SQL> exec war_master.buy('MADERA',20000,1);
+No tiene suficiente oro para completar la transaccion.                                              
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from kingdoms where id_kingdom = 1;
+
+ID_KINGDOM NAME                                                                                     
+---------- --------------------                                                                     
+LOGO                                                                                                
+----------------------------------------------------------------------------------------------------
+MON       GOLD       IRON       WOOD    DEFENSE     ATTACK    ARCHERS    PIKEMEN    KNIGHTS         
+--- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ----------         
+   WIZARDS     CROWNS     TOWERS    CANNONS                                                         
+---------- ---------- ---------- ----------                                                         
+         1 Acuario                                                                                  
+                                                                                                    
+Jan      40000      10000      20000          0          0          0          0          0         
+         0          0          0          0                                                         
+                                                                                                    
+
+SQL> exec war_master.monitor
+Reserva Central                                                                                     
+-----------------------------------                                                                 
+Cantidad de oro:     5000000                                                                        
+Cantidad de madera:  2000000                                                                        
+Cantidad de hierro:  2000000                                                                        
+Precio de la madera: 2                                                                              
+Precio del hierro:   4                                                                              
+-----------------------------------                                                                 
+Ranking de reinos                                                                                   
+--------------------------------------------------                                                  
+Reino: Acuario              Puntaje: 40000                                                          
+Reino: Piscis               Puntaje: 40000                                                          
+Reino: Aries                Puntaje: 40000                                                          
+Reino: Tauro                Puntaje: 40000                                                          
+Reino: Geminis              Puntaje: 40000                                                          
+Reino: Capricornio          Puntaje: 40000                                                          
+Reino: Leo                  Puntaje: 40000                                                          
+Reino: Virgo                Puntaje: 40000                                                          
+Reino: Libra                Puntaje: 40000                                                          
+Reino: Escorpio             Puntaje: 40000                                                          
+Reino: Sagitario            Puntaje: 40000                                                          
+Reino: Cancer               Puntaje: 40000                                                          
+--------------------------------------------------                                                  
+Bitacora                                                                                            
+Reino        Fecha/Hora                     Oro        Madera     Hierro     Coronas   Tipo         
+------------------------------------------------------------------------------------------          
+------------------------------------------------------------------------------------------          
+
+PL/SQL procedure successfully completed.
+
+SQL> start stored_procedures/2-buy
+SQL> create or replace procedure WAR_MASTER.buy(p_material varchar2, p_amount_bought number, p_kingdom number) as
+  2  
+  3  	 p_reserve_material number;
+  4  	 p_material_price   number(10, 3);
+  5  	 p_kingdom_gold     number;
+  6  
+  7  	 begin
+  8  
+  9  	     select GOLD
+ 10  	     into p_kingdom_gold
+ 11  	     from WAR_MASTER.KINGDOMS
+ 12  	     where ID_KINGDOM = p_kingdom;
+ 13  
+ 14  	     if p_amount_bought > 0
+ 15  	     then
+ 16  
+ 17  		 case p_material
+ 18  		     when 'MADERA'
+ 19  		     then
+ 20  			 select
+ 21  			     WOOD,
+ 22  			     WOOD_PRICE
+ 23  			 into p_reserve_material, p_material_price
+ 24  			 from WAR_MASTER.CENTRAL_RESERVE;
+ 25  
+ 26  			 if p_kingdom_gold >= (p_material_price * p_amount_bought)
+ 27  			 then
+ 28  			     update WAR_MASTER.KINGDOMS
+ 29  			     set WOOD	= WOOD + p_amount_bought,
+ 30  				 gold	= gold - (p_material_price * p_amount_bought),
+ 31  				 CROWNS = CROWNS + 5
+ 32  			     where ID_KINGDOM = p_kingdom;
+ 33  
+ 34  			     update WAR_MASTER.CENTRAL_RESERVE
+ 35  			     set GOLD = GOLD + (p_material_price * p_amount_bought),
+ 36  				 WOOD = WOOD - p_amount_bought;
+ 37  
+ 38  			     p_material_price :=
+ 39  			     p_material_price + (p_material_price * round(p_amount_bought / p_reserve_material, 2));
+ 40  
+ 41  			     update WAR_MASTER.CENTRAL_RESERVE
+ 42  			     set WOOD_PRICE = p_material_price;
+ 43  
+ 44  			     insert into WAR_MASTER.TRANSACTIONS (TRANSACTION_ID, TRANSACTION_TYPE, ID_KINGDOM, WOOD, CROWNS)
+ 45  			     values (WAR_MASTER.TRANSAC_SEQ.nextval, 'CMP', p_kingdom, p_amount_bought, 5);
+ 46  
+ 47  			 else
+ 48  			     dbms_output.put_line('No tiene suficiente oro para completar la transaccion.');
+ 49  			 end if;
+ 50  
+ 51  
+ 52  		     when 'HIERRO'
+ 53  		     then
+ 54  			 select
+ 55  			     IRON,
+ 56  			     IRON_PRICE
+ 57  			 into p_reserve_material, p_material_price
+ 58  			 from WAR_MASTER.CENTRAL_RESERVE;
+ 59  
+ 60  			 if p_kingdom_gold >= (p_material_price * p_amount_bought)
+ 61  			 then
+ 62  			     update WAR_MASTER.KINGDOMS
+ 63  			     set IRON	= IRON + p_amount_bought,
+ 64  				 gold	= gold - (p_material_price * p_amount_bought),
+ 65  				 CROWNS = CROWNS + 5
+ 66  			     where ID_KINGDOM = p_kingdom;
+ 67  
+ 68  			     update WAR_MASTER.CENTRAL_RESERVE
+ 69  			     set GOLD = GOLD + (p_material_price * p_amount_bought),
+ 70  				 IRON = IRON - p_amount_bought;
+ 71  
+ 72  			     p_material_price :=
+ 73  			     p_material_price + (p_material_price * round(p_amount_bought / p_reserve_material, 2));
+ 74  
+ 75  			     update WAR_MASTER.CENTRAL_RESERVE
+ 76  			     set IRON_PRICE = p_material_price;
+ 77  
+ 78  			     insert into WAR_MASTER.TRANSACTIONS (TRANSACTION_ID, TRANSACTION_TYPE, ID_KINGDOM, IRON, CROWNS)
+ 79  			     values (WAR_MASTER.TRANSAC_SEQ.nextval, 'CMP', p_kingdom, p_amount_bought, 5);
+ 80  			 else
+ 81  			     dbms_output.put_line('No tiene suficiente oro para completar la transaccion.');
+ 82  			 end if;
+ 83  
+ 84  
+ 85  		 end case;
+ 86  
+ 87  	     else
+ 88  		 dbms_output.put_line('La cantidad a comprar debe ser mayor que 0.');
+ 89  
+ 90  	     end if;
+ 91  
+ 92  	 end;
+ 93  /
+
+Procedure created.
+
+SQL> start stored_procedures/3-sell
+SQL> create or replace procedure WAR_MASTER.sell(p_material varchar2, p_amount_sold number, p_kingdom number) as
+  2  
+  3  	 p_reserve_material number;
+  4  	 p_material_price   number(10, 3);
+  5  	 p_kingdom_material number;
+  6  
+  7  	 begin
+  8  
+  9  	     if p_amount_sold > 0
+ 10  	     then
+ 11  
+ 12  		 case p_material
+ 13  		     when 'MADERA'
+ 14  		     then
+ 15  			 select
+ 16  			     WOOD,
+ 17  			     WOOD_PRICE
+ 18  			 into p_reserve_material, p_material_price
+ 19  			 from WAR_MASTER.CENTRAL_RESERVE;
+ 20  
+ 21  			 select WOOD
+ 22  			 into p_kingdom_material
+ 23  			 from WAR_MASTER.KINGDOMS
+ 24  			 where ID_KINGDOM = p_kingdom;
+ 25  
+ 26  			 if p_kingdom_material >= p_amount_sold
+ 27  			 then
+ 28  			     update WAR_MASTER.KINGDOMS
+ 29  			     set WOOD	= WOOD - p_amount_sold,
+ 30  				 gold	= gold + (p_material_price * p_amount_sold),
+ 31  				 CROWNS = CROWNS + 10
+ 32  			     where ID_KINGDOM = p_kingdom;
+ 33  
+ 34  			     update WAR_MASTER.CENTRAL_RESERVE
+ 35  			     set GOLD = GOLD - (p_material_price * p_amount_sold),
+ 36  				 WOOD = WOOD + p_amount_sold;
+ 37  
+ 38  			     p_material_price :=
+ 39  			     p_material_price - (p_material_price * round(p_amount_sold / p_reserve_material, 2));
+ 40  
+ 41  			     update WAR_MASTER.CENTRAL_RESERVE
+ 42  			     set WOOD_PRICE = p_material_price;
+ 43  
+ 44  			     insert into WAR_MASTER.TRANSACTIONS (TRANSACTION_ID, TRANSACTION_TYPE, ID_KINGDOM, WOOD, CROWNS)
+ 45  			     values (WAR_MASTER.TRANSAC_SEQ.nextval, 'VTA', p_kingdom, p_amount_sold, 10);
+ 46  			 else
+ 47  			     dbms_output.put_line('No tiene suficientes recursos para vender');
+ 48  			 end if;
+ 49  
+ 50  
+ 51  		     when 'HIERRO'
+ 52  		     then
+ 53  			 select
+ 54  			     IRON,
+ 55  			     IRON_PRICE
+ 56  			 into p_reserve_material, p_material_price
+ 57  			 from WAR_MASTER.CENTRAL_RESERVE;
+ 58  
+ 59  			 select IRON
+ 60  			 into p_kingdom_material
+ 61  			 from WAR_MASTER.KINGDOMS
+ 62  			 where ID_KINGDOM = p_kingdom;
+ 63  
+ 64  			 if p_kingdom_material >= p_amount_sold
+ 65  			 then
+ 66  			     update WAR_MASTER.KINGDOMS
+ 67  			     set IRON	= IRON - p_amount_sold,
+ 68  				 gold	= gold + (p_material_price * p_amount_sold),
+ 69  				 CROWNS = CROWNS + 10
+ 70  			     where ID_KINGDOM = p_kingdom;
+ 71  
+ 72  			     update WAR_MASTER.CENTRAL_RESERVE
+ 73  			     set GOLD = GOLD - (p_material_price * p_amount_sold),
+ 74  				 IRON = IRON + p_amount_sold;
+ 75  
+ 76  			     p_material_price :=
+ 77  			     p_material_price - (p_material_price * round(p_amount_sold / p_reserve_material, 2));
+ 78  
+ 79  			     update WAR_MASTER.CENTRAL_RESERVE
+ 80  			     set IRON_PRICE = p_material_price;
+ 81  
+ 82  			     insert into WAR_MASTER.TRANSACTIONS (TRANSACTION_ID, TRANSACTION_TYPE, ID_KINGDOM, IRON, CROWNS)
+ 83  			     values (WAR_MASTER.TRANSAC_SEQ.nextval, 'VTA', p_kingdom, p_amount_sold, 10);
+ 84  			 else
+ 85  			     dbms_output.put_line('No tiene suficientes recursos para vender');
+ 86  			 end if;
+ 87  
+ 88  		 end case;
+ 89  
+ 90  	     else
+ 91  		 dbms_output.put_line('La cantidad a vender debe ser mayor que 0.');
+ 92  	     end if;
+ 93  
+ 94  	 end;
+ 95  /
+
+Procedure created.
+
+SQL> spool off

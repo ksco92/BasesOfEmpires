@@ -23,7 +23,7 @@ create or replace procedure WAR_MASTER.sell(p_material varchar2, p_amount_sold n
                     from WAR_MASTER.KINGDOMS
                     where ID_KINGDOM = p_kingdom;
 
-                    if p_kingdom_material > p_amount_sold
+                    if p_kingdom_material >= p_amount_sold
                     then
                         update WAR_MASTER.KINGDOMS
                         set WOOD   = WOOD - p_amount_sold,
@@ -61,7 +61,7 @@ create or replace procedure WAR_MASTER.sell(p_material varchar2, p_amount_sold n
                     from WAR_MASTER.KINGDOMS
                     where ID_KINGDOM = p_kingdom;
 
-                    if p_kingdom_material > p_amount_sold
+                    if p_kingdom_material >= p_amount_sold
                     then
                         update WAR_MASTER.KINGDOMS
                         set IRON   = IRON - p_amount_sold,
